@@ -8,9 +8,8 @@ int main(int argc, char *argv[])
     draw_random_cards(hand, argc);
 
     for(i = 1; i < argc; ++i) {
-        printf("%d: %s\n", i, argv[i]);
         init_card_from_string(&hand[i], argv[i]);
-        //print_card(hand[i]);
+        print_card(hand[i]);
     }
 
     printf("\n");

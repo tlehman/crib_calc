@@ -68,7 +68,7 @@ Suit s_to_suit(const char s[])
 
 void print_card(Card c)
 {
-    printf("%s%s ", rank_to_s(c.rank), suit_to_s(c.suit));
+    printf("%s%s  ", rank_to_s(c.rank), suit_to_s(c.suit));
 }
 
 void draw_random_cards(Card c[], int count)
