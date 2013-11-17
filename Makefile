@@ -11,4 +11,5 @@ hand.o:
 clean:
 	rm -rf *.dSYM
 	rm *.o
+	rm hand
 

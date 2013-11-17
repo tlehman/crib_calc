@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
         print_card(hand[i]);
     }
 
+    printf("\n");
     return 0;
 }
 
