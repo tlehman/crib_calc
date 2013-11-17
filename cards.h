@@ -1,6 +1,3 @@
-#ifndef _cards_h_
-#define _cards_h_
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,7 +23,3 @@ void print_card(Card c);
 void draw_random_cards(Card c[], int count);
 
 void init_card_from_string(Card *c, const char *s);
-
-const char *ranks[] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-
-#endif
