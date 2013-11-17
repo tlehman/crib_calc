@@ -87,6 +87,13 @@ void print_card(Card c)
     printf("%s%s  ", rank_to_s(c.rank), suit_to_s(c.suit));
 }
 
+/** draw_random_cards takes:
+    @c      Card[]
+    @count  int
+
+    Where c has count number of elements, and then initializes
+    all count cards with random values.
+ */
 void draw_random_cards(Card c[], int count)
 {
     int i = 0;
@@ -96,6 +103,13 @@ void draw_random_cards(Card c[], int count)
     }
 }
 
+/** init_card_from_string takes:
+    @c      Card *
+    @str    const char *
+
+    And attempts to extract the rank and suit from the string,
+    assigning the appropriate value to *c
+ */
 void init_card_from_string(Card *c, const char *str)
 {
     char pattern[] = "^([A2-9JKQ]|10)([CHSD])$";
