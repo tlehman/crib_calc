@@ -36,7 +36,9 @@ const char *rank_to_s(Rank r);
 
 
 void print_card(Card c);
+void print_cards(Card *c, int count);
 void draw_random_cards(Card c[], int count);
 void init_card_from_string(Card *c, const char *s);
+void init_cards_from_strings(Card *c, int count, const char *s[]);
 
 

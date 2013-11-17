@@ -16,19 +16,30 @@
  */
 #include "cards.h"
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
     int i = 1;
-    Card hand[argc];
+    int count = argc;
+    Card *hand;
 
-    draw_random_cards(hand, argc);
+    if(1 == argc) {
+        count = 6; // default cribbage hand size
+        hand = (Card *)malloc(sizeof(Card)*count);
 
-    for(i = 1; i < argc; ++i) {
-        init_card_from_string(&hand[i], argv[i]);
-        print_card(hand[i]);
+        printf("no input, drawing six random cards\n");
+
+        draw_random_cards(hand, count);
+    } else {
+        hand = (Card *)malloc(sizeof(Card));
+
+        init_cards_from_strings(hand, count, argv);
     }
 
+    print_cards(hand, count);
+
     printf("\n");
+
+    if(hand) free(hand);
     return 0;
 }
 

@@ -87,6 +87,14 @@ void print_card(Card c)
     printf("%s%s  ", rank_to_s(c.rank), suit_to_s(c.suit));
 }
 
+void print_cards(Card *c, int count)
+{
+    int i = 0;
+    for(i = 1; i < count; ++i) {
+        print_card(c[i]);
+    }
+}
+
 /** draw_random_cards takes:
     @c      Card[]
     @count  int
@@ -142,5 +150,13 @@ void init_card_from_string(Card *c, const char *str)
 
     c->rank = s_to_rank(rank_s);
     c->suit = s_to_suit(suit_s);
+}
+
+void init_cards_from_strings(Card *c, int count, const char *s[])
+{
+    int i = 1;
+    for(i = 1; i < count; ++i) {
+        init_card_from_string(c + i, s[i]);
+    }
 }
 
