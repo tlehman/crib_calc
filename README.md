@@ -17,3 +17,26 @@ then enter something like this:
   $ bin/hand 2h 2d 2c 2s
   2♥  2♦  2♣  2♠
 ```
+
+## Note
+Make sure that you are using UTF-8.
+
+## Implementation
+
+The `Card` is a struct:
+
+```
+struct card
+{
+    Rank rank;
+    Suit suit;
+};
+```
+
+Where `Rank` is an `unsigned int` and `Suit` is an enum type:
+
+```
+enum suit { club, heart, spade, diamond };
+```
+
+
