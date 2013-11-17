@@ -82,7 +82,7 @@ void draw_random_cards(Card c[], int count)
 
 void init_card_from_string(Card *c, const char *str)
 {
-    char pattern[] = "([A2-9JKQ]|10)([CHSD])";
+    char pattern[] = "^([A2-9JKQ]|10)([CHSD])$";
     regex_t reg;
 
     int max_len = 6; // the max length is 4 == strlen("10C")+1 (the null char)
@@ -101,7 +101,10 @@ void init_card_from_string(Card *c, const char *str)
         exit(-1);
     }
 
-    regexec(&reg, str, n, matches, 0);
+    if(0 != regexec(&reg, str, n, matches, 0)) {
+        printf("\nerror parsing card string: %s\n", str);
+        exit(-1);
+    }
 
     // copy the match results into temporary strings
     strncpy(rank_s, (str + matches[1].rm_so), matches[1].rm_eo - matches[1].rm_so);
