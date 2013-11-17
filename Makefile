@@ -1,15 +1,18 @@
 CFLAGS=-Wall -g
 
-hand: hand.o cards.o
+all: hand
+
+hand:
+	cc tmp/*.o -o bin/hand
 
 cards.o:
-	cc -c cards.c
+	cc -c src/cards.c -o tmp/cards.o
 
 hand.o:
-	cc -c hand.c
+	cc -c src/hand.c -o tmp/hand.o
 
 clean:
+	rm bin/*
+	rm tmp/*
 	rm -rf *.dSYM
-	rm *.o
-	rm hand
 
