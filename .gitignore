@@ -1,0 +1,5 @@
+hand
+*.dSYM
+*.o
+*.swp
+*.!sync
