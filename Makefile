@@ -2,7 +2,7 @@ CFLAGS=-Wall -g
 
 all: hand
 
-hand:
+hand: cards.o hand.o
 	cc tmp/*.o -o bin/hand
 
 cards.o:
