@@ -90,9 +90,10 @@ void print_card(Card c)
 void print_cards(Card *c, int count)
 {
     int i = 0;
-    for(i = 1; i < count; ++i) {
+    for(i = 0; i < count; ++i) {
         print_card(c[i]);
     }
+    printf("\n");
 }
 
 /** draw_random_cards takes:
@@ -154,8 +155,8 @@ void init_card_from_string(Card *c, const char *str)
 
 void init_cards_from_strings(Card *c, int count, const char *s[])
 {
-    int i = 1;
-    for(i = 1; i < count; ++i) {
+    int i = 0;
+    for(i = 0; i < count; ++i) {
         init_card_from_string(c + i, s[i]);
     }
 }

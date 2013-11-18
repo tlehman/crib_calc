@@ -30,14 +30,13 @@ int main(int argc, const char *argv[])
 
         draw_random_cards(hand, count);
     } else {
-        hand = (Card *)malloc(sizeof(Card));
+        count = argc - 1;
+        hand = (Card *)malloc(sizeof(Card)*count);
 
-        init_cards_from_strings(hand, count, argv);
+        init_cards_from_strings(hand, count, argv+1);
     }
 
     print_cards(hand, count);
-
-    printf("\n");
 
     if(hand) free(hand);
     return 0;
