@@ -22,8 +22,10 @@
 int score_and_print(Card *hand, int count)
 {
     int score = 0;
-    int suit_map[NUM_SUITS] = {0};
-    int rank_map[NUM_RANKS] = {0};
+    int suit_map[NUM_SUITS];
+    int rank_map[NUM_RANKS];
+    int i = 0;
+    int j = 0;
 
     printf("\n");
 
@@ -32,17 +34,17 @@ int score_and_print(Card *hand, int count)
     //
     //    This algorithm simply uses a map from suits to counts, 
     //    any value at least four is added to the score
-    for(int i = 0; i < count; ++i) {
+    for(i = 0; i < count; ++i) {
         suit_map[hand[i].suit] += 1;  // you could add the card here
     }
-    for(int i = 0; i < NUM_SUITS; ++i) {
+    for(i = 0; i < NUM_SUITS; ++i) {
         if(suit_map[i] >= FLUSH_MIN) {
             score += suit_map[i];
             printf("Flush for %d: ", suit_map[i]);
 
             // find all cards of that suit
             Suit suit = (Suit)i;
-            for(int j = 0; j < count; ++j) {
+            for(j = 0; j < count; ++j) {
                 if(hand[j].suit == suit) print_card(hand[j]);
             }
             printf("\n");
@@ -58,8 +60,8 @@ int score_and_print(Card *hand, int count)
     //    3              34
     //    4  
     //
-    for(int i = 0; i < count; ++i) {
-        for(int j = i+1; j < count; ++j) {
+    for(i = 0; i < count; ++i) {
+        for(j = i+1; j < count; ++j) {
             if(hand[i].rank == hand[j].rank) {
                 printf("Pair for 2: ");
                 print_card(hand[i]);
