@@ -22,8 +22,9 @@
 int score_and_print(Card *hand, int count)
 {
     int score = 0;
-    int suit_map[NUM_SUITS];
-    int rank_map[NUM_RANKS];
+    int suit_map[NUM_SUITS] = {0,0,0,0};
+    int rank_map[NUM_RANKS] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+
     int i = 0;
     int j = 0;
 
