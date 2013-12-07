@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
-#include "cards.h"
+#include "cribbage.h"
 
 int main(int argc, const char *argv[])
 {
@@ -37,6 +37,8 @@ int main(int argc, const char *argv[])
     }
 
     print_cards(hand, count);
+
+    score_and_print(hand, count);
 
     if(hand) free(hand);
     return 0;

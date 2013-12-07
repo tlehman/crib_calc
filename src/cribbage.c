@@ -16,17 +16,22 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see [http://www.gnu.org/licenses/].  */
-#include "cards.h"
+#include "cribbage.h"
+#include "debug.h"
 
-int score_quadruples(Card *c, int count);
-int score_triples   (Card *c, int count);
-int score_pairs     (Card *c, int count);
+int score_and_print(Card *c, int count)
+{
+    int score = 0;
+    int suit_map[NUM_SUITS] = {0};
+    int rank_map[NUM_RANKS] = {0};
 
-int score_runs_of_four (Card *c, int count);
-int score_runs_of_three(Card *c, int count);
+    PRINT_ARRAY(suit_map, NUM_SUITS);
+    PRINT_ARRAY(rank_map, NUM_RANKS);
 
-int score_flushes(Card *c, int count);
+    // flushes
+    // pairs
+    // runs
+    // fifteens
+    return score;
+}
 
-int score_fifteens(Card *c, int count);
-
-int score_and_print(Card *c, int count);

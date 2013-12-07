@@ -14,6 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -24,6 +25,8 @@
 enum suit { club, heart, spade, diamond };
 typedef unsigned int Rank;
 typedef enum suit Suit;
+static const int NUM_RANKS = 13;
+static const int NUM_SUITS = 4;
 
 struct card
 {
@@ -41,5 +44,4 @@ void print_cards(Card *c, int count);
 void draw_random_cards(Card c[], int count);
 void init_card_from_string(Card *c, const char *s);
 void init_cards_from_strings(Card *c, int count, const char *s[]);
-
 

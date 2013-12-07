@@ -39,4 +39,7 @@ Where `Rank` is an `unsigned int` and `Suit` is an enum type:
 enum suit { club, heart, spade, diamond };
 ```
 
+## Todo
+ - Fix segfault when lower-case ranks are entered
+ - Add score and print function
 
