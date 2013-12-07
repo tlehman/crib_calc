@@ -25,6 +25,8 @@ int score_and_print(Card *hand, int count)
     int suit_map[NUM_SUITS] = {0};
     int rank_map[NUM_RANKS] = {0};
 
+    printf("\n");
+
     // Count Flushes
     //    A Flush is 4 or more cards of the same suit.
     //
@@ -36,9 +38,14 @@ int score_and_print(Card *hand, int count)
     for(int i = 0; i < NUM_SUITS; ++i) {
         if(suit_map[i] >= FLUSH_MIN) {
             score += suit_map[i];
-            printf("Flush for %d\n", suit_map[i]);
+            printf("Flush for %d: ", suit_map[i]);
+
             // find all cards of that suit
-            Suit suit = (Suit)suit_map[i];
+            Suit suit = (Suit)i;
+            for(int j = 0; j < count; ++j) {
+                if(hand[j].suit == suit) print_card(hand[j]);
+            }
+            printf("\n");
         }
     }
 
@@ -55,6 +62,10 @@ int score_and_print(Card *hand, int count)
         for(int j = i+1; j < count; ++j) {
             if(hand[i].rank == hand[j].rank) {
                 printf("Pair for 2: ");
+                print_card(hand[i]);
+                print_card(hand[j]);
+                printf("\n");
+
                 score += 2;
             }
         }
@@ -62,6 +73,8 @@ int score_and_print(Card *hand, int count)
 
     // Runs
     // Fifteens
+
+    printf("\nScore: %d\n", score);
     return score;
 }
 
