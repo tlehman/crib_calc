@@ -107,6 +107,7 @@ void draw_random_cards(Card c[], int count)
 {
     srand(time(NULL));
     int i = 0;
+
     for(i = 0; i < count; ++i) {
         c[i].suit = (Suit)(rand()%4);
         c[i].rank = (Rank)(rand()%13);
