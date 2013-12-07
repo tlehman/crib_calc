@@ -105,10 +105,11 @@ void print_cards(Card *c, int count)
  */
 void draw_random_cards(Card c[], int count)
 {
+    srand(time(NULL));
     int i = 0;
     for(i = 0; i < count; ++i) {
-        c[i].suit = (Suit)(arc4random()%4);
-        c[i].rank = (Rank)(arc4random()%13);
+        c[i].suit = (Suit)(rand()%4);
+        c[i].rank = (Rank)(rand()%13);
     }
 }
 
