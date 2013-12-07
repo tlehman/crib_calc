@@ -1,6 +1,10 @@
 CFLAGS=-Wall -g
 
-all: hand
+all: prep hand
+
+prep:
+	if [ -d bin ]; then echo '' > /dev/null; else mkdir bin; fi
+	if [ -d tmp ]; then echo '' > /dev/null; else mkdir tmp; fi
 
 hand: cards.o hand.o
 	cc tmp/*.o -o bin/hand
