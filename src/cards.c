@@ -51,7 +51,7 @@ Rank s_to_rank(const char s[])
     unsigned int i = 0;
     const char *ranks[] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     for(i = 0; i < sizeof(ranks); ++i) {
-        if(s[0] == ranks[i][0]) return (Rank)i;
+        if(toupper(s[0]) == ranks[i][0]) return (Rank)i;
     }
     printf("error: '%s' is not a rank", s);
     exit(-1);

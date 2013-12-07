@@ -40,7 +40,6 @@ enum suit { club, heart, spade, diamond };
 ```
 
 ## Todo
- - Fix segfault when lower-case ranks are entered
  - Finish score and print function
  - Make style consistent
  - Disallow duplicate cards

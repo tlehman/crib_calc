@@ -20,6 +20,7 @@
 #include <time.h>
 #include <string.h>
 #include <regex.h>
+#include <ctype.h>
 
 // ♣  ♥  ♠  ♦  
 enum suit { club, heart, spade, diamond };
