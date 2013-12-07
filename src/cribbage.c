@@ -19,19 +19,49 @@
 #include "cribbage.h"
 #include "debug.h"
 
-int score_and_print(Card *c, int count)
+int score_and_print(Card *hand, int count)
 {
     int score = 0;
     int suit_map[NUM_SUITS] = {0};
     int rank_map[NUM_RANKS] = {0};
 
-    PRINT_ARRAY(suit_map, NUM_SUITS);
-    PRINT_ARRAY(rank_map, NUM_RANKS);
+    // Count Flushes
+    //    A Flush is 4 or more cards of the same suit.
+    //
+    //    This algorithm simply uses a map from suits to counts, 
+    //    any value at least four is added to the score
+    for(int i = 0; i < count; ++i) {
+        suit_map[hand[i].suit] += 1;  // you could add the card here
+    }
+    for(int i = 0; i < NUM_SUITS; ++i) {
+        if(suit_map[i] >= FLUSH_MIN) {
+            score += suit_map[i];
+            printf("Flush for %d\n", suit_map[i]);
+            // find all cards of that suit
+            Suit suit = (Suit)suit_map[i];
+        }
+    }
 
-    // flushes
-    // pairs
-    // runs
-    // fifteens
+    // Count Pairs
+    //    A Pair is two cards with the same rank.
+    //
+    //        1   2   3   4
+    //    1      12  13  14
+    //    2          23  24
+    //    3              34
+    //    4  
+    //
+    for(int i = 0; i < count; ++i) {
+        for(int j = i+1; j < count; ++j) {
+            if(hand[i].rank == hand[j].rank) {
+                printf("Pair for 2: ");
+                score += 2;
+            }
+        }
+    }
+
+    // Runs
+    // Fifteens
     return score;
 }
 

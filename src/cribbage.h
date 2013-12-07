@@ -18,15 +18,7 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].  */
 #include "cards.h"
 
-int score_quadruples(Card *c, int count);
-int score_triples   (Card *c, int count);
-int score_pairs     (Card *c, int count);
-
-int score_runs_of_four (Card *c, int count);
-int score_runs_of_three(Card *c, int count);
-
-int score_flushes(Card *c, int count);
-
-int score_fifteens(Card *c, int count);
+static const int FLUSH_MIN = 4;
 
 int score_and_print(Card *c, int count);
+

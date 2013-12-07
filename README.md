@@ -41,5 +41,6 @@ enum suit { club, heart, spade, diamond };
 
 ## Todo
  - Fix segfault when lower-case ranks are entered
- - Add score and print function
+ - Finish score and print function
+ - Make style consistent
 
