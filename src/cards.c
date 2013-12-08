@@ -46,6 +46,11 @@ const char *rank_to_s(Rank r)
     return ranks[i];
 }
 
+/** s_to_rank takes:
+    @s      const char[]
+
+    And maps strings matching /^(A|[2-9JQK]|10)$/i to a Rank.
+ */
 Rank s_to_rank(const char s[])
 {
     unsigned int i = 0;
@@ -57,6 +62,11 @@ Rank s_to_rank(const char s[])
     exit(-1);
 }
 
+/** s_to_suit takes:
+    @s      const char[]
+
+    And maps strings matching /^chsd$/i to a Suit.
+ */
 Suit s_to_suit(const char s[])
 {
     switch(s[0]) {
@@ -87,6 +97,13 @@ void print_card(Card c)
     printf("%s%s  ", rank_to_s(c.rank), suit_to_s(c.suit));
 }
 
+/** print_cards takes:
+    @c      Card*
+    @count  int
+
+    And outputs the rank and suit (formatted), followed by 
+    a newline.
+ */
 void print_cards(Card *c, int count)
 {
     int i = 0;
@@ -155,6 +172,14 @@ void init_card_from_string(Card *c, const char *str)
     c->suit = s_to_suit(suit_s);
 }
 
+/** init_cards_from_string takes:
+    @c      Card*
+    @count  int
+    @s      const char*[]
+
+    And maps the string @c matching /^(([A2-9JKQ]|10)([CHSD]) )+$/ to a 
+    corresponding array of Cards of size @count.
+ */
 void init_cards_from_strings(Card *c, int count, const char *s[])
 {
     int i = 0;
