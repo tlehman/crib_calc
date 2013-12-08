@@ -74,7 +74,25 @@ int score_and_print(Card *hand, int count)
         }
     }
 
-    // Runs
+    // Count Runs
+    //    A Run is a sequence of 3 or more cards with contiguous ranks.
+    //
+    //    To find runs, we keep track of these data:
+    //      run length    int
+    //      multiplicity  int
+    //      index         int
+    //      rank_map      int[13]
+    //
+    //    Before we introduce the algorithm, it is helpful to see an 
+    //    example, suppose 
+    //        9♥  8♥  6♣  7♠  8♦  8♣
+    //
+    //    The algorithm goes like this:
+    //      Initialize index        = 0
+    //                 multiplicity = 1
+    //                 run_length   = 
+
+
     // Fifteens
 
     printf("\nScore: %d\n", score);
