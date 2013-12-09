@@ -126,7 +126,6 @@ int score_and_print(Card *hand, int count)
     for(i = 0; i < count; ++i) {
         rank_map[(int)hand[i].rank] += 1;
     }
-    PRINT_ARRAY(rank_map, 13);
 
     // Find the first flush (good enough for now)
     int rlen = 0;
