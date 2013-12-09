@@ -62,5 +62,5 @@ always greater than the outer index `i`.
  - Finish score and print function
  - Make style consistent
  - Disallow duplicate cards
- - Count more than one flush (if exists)
+ - Count more than one run (if exists)
 
