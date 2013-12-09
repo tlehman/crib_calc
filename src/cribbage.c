@@ -114,14 +114,38 @@ int score_and_print(Card *hand, int count)
     //              multiplicity *= rank_map[index]
     //          else
     //              if run_length >= 3
-    //                  (size = run_length, 
-    //                   score = multiplicity * run_length)
+    //                  display (run_length, multiplicity * run_length)
     //              endif
     //              run_length = 0
     //              multiplicity = 1
     //          endif
     //      End Loop
+    //
+
+    // Initialize rank_map
+    for(i = 0; i < count; ++i) {
+        rank_map[(int)hand[i].rank] += 1;
+    }
+    PRINT_ARRAY(rank_map, 13);
+
+    // Find the first flush (good enough for now)
+    int rlen = 0;
+    int mult = 1;
+
     for(i = 0; i < 13; ++i) {
+        if(rank_map[i] > 0) {
+            rlen += 1;
+            mult *= rank_map[i];
+        } else {
+            if(rlen >= 3) {
+                // Run found!
+                printf("Run of %d for %d\n", rlen, mult*rlen);
+                //for(j = (i-rlen); j < i; ++j) print_card();  How to find cards corresponding to run?
+            }
+            // reset Run data at sight of zero value
+            rlen = 0;
+            mult = 1;
+        }
     }
 
     // Fifteens
