@@ -7,6 +7,17 @@
 #include "cribbage.h"
 #include "debug.h"
 
+
+unsigned int count_ones(unsigned int bits)
+{
+    unsigned int v = bits;
+    unsigned int c = 0;
+    for(c = 0; v; ++c) {
+        v &= v-1;
+    }
+    return c;
+}
+
 /** score_and_print takes:
     @hand   Card *
     @count  int
@@ -23,8 +34,8 @@ int score_and_print(Card *hand, int count)
     int suit_map[4]  = {0,0,0,0};
     int rank_map[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-    int i = 0;
-    int j = 0;
+    unsigned int i = 0;
+    unsigned int j = 0;
 
     printf("\n");
 
@@ -145,21 +156,21 @@ int score_and_print(Card *hand, int count)
         }
     }
 
-    // Fifteens
+    // Count Fifteens
     //     A Fifteen is any combination of cards whose ranks sum up to 15.
     //
     //     To find fifteens, we need to look at all combinations of cards.
-    //     For example, for a hand of three cards:  5♣  10♥  5♣   we must 
+    //     For example, for a hand of three cards:  5♣  10♥  5♥  we must 
     //     consider all 2^3 - 1 = 7 non-empty subsets:
     //        Hand         | Bits | Sum
     //        -------------|------|-----
-    //                 5♣  | 001  |  (5)
+    //                 5♥  | 001  |  (5)
     //            10♥      | 010  | (10)
-    //            10♥  5♣  | 011  | (15)  *
+    //            10♥  5♥  | 011  | (15)  *
     //        5♣           | 100  |  (5)
-    //        5♣       5♣  | 101  | (10)
+    //        5♣       5♥  | 101  | (10)
     //        5♣  10♥      | 110  | (15)  *
-    //        5♣  10♥  5♣  | 111  | (20)
+    //        5♣  10♥  5♥  | 111  | (20)
     //
     //     There is a well known correspondence betweeen subsets and binary 
     //     representations of integers, illustrated in the 'Bits' column above.
@@ -167,20 +178,33 @@ int score_and_print(Card *hand, int count)
     //     an integer from 0 to (2^n - 1) and identifying the bits that are one 
     //     with the subset membership relation.
     // 
-    Card* subset[count];
-    for(i = 0; i < 2_TO_THE(count); ++i) {
-        zero_cards(subset); 
+    int k = 0;
+    int sum = 0;
 
-        // get bits of i
+    for(i = 0; i < TWO_TO_THE(count); ++i) {
+        k = 0;
+
+        // select subset of hand using bits
+        Card subhand[count_ones(i)];
+
+        for(j = 1; j < sizeof(unsigned int)*8; ++j) {
+            if(JTH_BIT(i, j)) {
+                subhand[k++] = hand[j-1];
+            }
+        }
+
+        sum = 0;
+        for(j = 0; j < k; ++j) {
+            sum += (int)subhand[j].rank;
+        }
+        if(sum == 15) {
+            printf("Fifteen for 2: ");
+            print_cards(subhand, count_ones(i));
+        }
+
     }
 
     printf("\nScore: %d\n", score);
     return score;
 }
 
-void zero_cards(Card *cards, int count) {
-    int i = 0;
-    for(i = 0; i < count; ++i) {
-        cards[i] = NULL;
-    }
-}

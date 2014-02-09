@@ -6,7 +6,11 @@
 */
 #include "cards.h"
 
-#define 2_TO_THE(POWER) (1 << POWER)
+#define TWO_TO_THE(POWER) (1 << POWER)
+
+#define JTH_BIT(BITS, J)  ((TWO_TO_THE((J-1)) & BITS) != 0)
+
+unsigned int count_ones(unsigned int bits);
 
 static const int FLUSH_MIN = 4;
 
