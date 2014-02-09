@@ -7,6 +7,16 @@
 #include "cribbage.h"
 #include "debug.h"
 
+/** score_and_print takes:
+    @hand   Card *
+    @count  int
+
+    And calculates the cribbage score:
+      - Flushes
+      - Pairs
+      - Runs
+      - Fifteens
+ */
 int score_and_print(Card *hand, int count)
 {
     int score = 0;
@@ -96,7 +106,7 @@ int score_and_print(Card *hand, int count)
     //                 run_length   = 0
     //      Scan from left to right (increasing index)
     //
-    //      Loop index 0 to 13
+    //      Loop index 1 to 13
     //          if rank_map[index] > 0
     //              run_length += 1
     //              multiplicity *= rank_map[index]
@@ -136,8 +146,41 @@ int score_and_print(Card *hand, int count)
     }
 
     // Fifteens
+    //     A Fifteen is any combination of cards whose ranks sum up to 15.
+    //
+    //     To find fifteens, we need to look at all combinations of cards.
+    //     For example, for a hand of three cards:  5♣  10♥  5♣   we must 
+    //     consider all 2^3 - 1 = 7 non-empty subsets:
+    //        Hand         | Bits | Sum
+    //        -------------|------|-----
+    //                 5♣  | 001  |  (5)
+    //            10♥      | 010  | (10)
+    //            10♥  5♣  | 011  | (15)  *
+    //        5♣           | 100  |  (5)
+    //        5♣       5♣  | 101  | (10)
+    //        5♣  10♥      | 110  | (15)  *
+    //        5♣  10♥  5♣  | 111  | (20)
+    //
+    //     There is a well known correspondence betweeen subsets and binary 
+    //     representations of integers, illustrated in the 'Bits' column above.
+    //     Using this correspondence, we can enumerate all 2^n subsets by looping
+    //     an integer from 0 to (2^n - 1) and identifying the bits that are one 
+    //     with the subset membership relation.
+    // 
+    Card* subset[count];
+    for(i = 0; i < 2_TO_THE(count); ++i) {
+        zero_cards(subset); 
+
+        // get bits of i
+    }
 
     printf("\nScore: %d\n", score);
     return score;
 }
 
+void zero_cards(Card *cards, int count) {
+    int i = 0;
+    for(i = 0; i < count; ++i) {
+        cards[i] = NULL;
+    }
+}

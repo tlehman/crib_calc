@@ -131,7 +131,7 @@ void init_card_from_string(Card *c, const char *str)
     char pattern[] = "^([A2-9JKQ]|10)([CHSD])$";
     regex_t reg;
 
-    int max_len = 6; // the max length is 4 == strlen("10C")+1 (the null char)
+    int max_len = 4; // the max length is 4 == strlen("10C")+1 (the null char)
     char rank_s[max_len];
     char suit_s[max_len];
 
