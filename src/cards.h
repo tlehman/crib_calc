@@ -24,6 +24,8 @@ struct card
 };
 typedef struct card Card;
 
+int rank_val(Rank r);
+
 const char *suit_to_s(Suit s);
 const char *rank_to_s(Rank r);
 

@@ -7,7 +7,6 @@
 #include "cribbage.h"
 #include "debug.h"
 
-
 unsigned int count_ones(unsigned int bits)
 {
     unsigned int v = bits;
@@ -181,7 +180,7 @@ int score_and_print(Card *hand, int count)
     int k = 0;
     int sum = 0;
 
-    for(i = 0; i < TWO_TO_THE(count); ++i) {
+    for(i = 1; i < TWO_TO_THE(count); ++i) {
         k = 0;
 
         // select subset of hand using bits
@@ -189,13 +188,14 @@ int score_and_print(Card *hand, int count)
 
         for(j = 1; j < sizeof(unsigned int)*8; ++j) {
             if(JTH_BIT(i, j)) {
-                subhand[k++] = hand[j-1];
+                subhand[k] = hand[j-1];
+                k += 1;
             }
         }
 
         sum = 0;
         for(j = 0; j < k; ++j) {
-            sum += (int)subhand[j].rank;
+            sum += rank_val(subhand[j].rank);
         }
         if(sum == 15) {
             printf("Fifteen for 2: ");

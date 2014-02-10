@@ -26,12 +26,18 @@ const char *suit_to_s(Suit s)
     return retval; 
 }
 
+int rank_val(Rank r)
+{
+    if((int)r > 10) return 10;
+    return (int)r;
+}
+
 const char *rank_to_s(Rank r)
 {
     unsigned i = (unsigned)r;
     if(i >= 13) return "\0";
     const char *ranks[] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-    return ranks[i];
+    return ranks[i-1];
 }
 
 /** s_to_rank takes:
@@ -44,7 +50,7 @@ Rank s_to_rank(const char s[])
     unsigned int i = 0;
     const char *ranks[] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     for(i = 0; i < sizeof(ranks); ++i) {
-        if(toupper(s[0]) == ranks[i][0]) return (Rank)i;
+        if(toupper(s[0]) == ranks[i][0]) return (Rank)(i+1);
     }
     printf("error: '%s' is not a rank", s);
     exit(-1);
