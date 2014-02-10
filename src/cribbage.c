@@ -147,6 +147,7 @@ int score_and_print(Card *hand, int count)
             if(rlen >= 3) {
                 // Run found!
                 printf("Run of %d for %d\n", rlen, mult*rlen);
+                score += mult*rlen;
                 //for(j = (i-rlen); j < i; ++j) print_card();  How to find cards corresponding to run?
             }
             // reset Run data at sight of zero value
@@ -200,6 +201,7 @@ int score_and_print(Card *hand, int count)
         if(sum == 15) {
             printf("Fifteen for 2: ");
             print_cards(subhand, count_ones(i));
+            score += 2;
         }
 
     }

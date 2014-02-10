@@ -35,7 +35,7 @@ int rank_val(Rank r)
 const char *rank_to_s(Rank r)
 {
     unsigned i = (unsigned)r;
-    if(i >= 13) return "\0";
+    if(i < 1 || i >= 13) return "\0";
     const char *ranks[] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     return ranks[i-1];
 }
