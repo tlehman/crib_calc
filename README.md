@@ -59,7 +59,6 @@ The above matrix is implemented as a nested loop where the inner index `j` is
 always greater than the outer index `i`.
 
 ## Todo
- - Finish score and print function
  - Make style consistent
  - Disallow duplicate cards
  - Count more than one run (if exists)
