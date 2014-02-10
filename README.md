@@ -60,6 +60,5 @@ always greater than the outer index `i`.
 
 ## Todo
  - Make style consistent
- - Disallow duplicate cards
  - Count more than one run (if exists)
 

@@ -12,7 +12,7 @@
 
 unsigned int count_ones(unsigned int bits);
 
-static const int FLUSH_MIN = 4;
+static const int FLUSH_MIN = 5;
 
 int score_and_print(Card *c, int count);
 

@@ -26,12 +26,22 @@ const char *suit_to_s(Suit s)
     return retval; 
 }
 
+/** rank_val takes:
+    @r     Rank
+
+    And returns the value (score) for that rank.
+ */
 int rank_val(Rank r)
 {
     if((int)r > 10) return 10;
     return (int)r;
 }
 
+/** rank_val takes:
+    @r     Rank
+
+    And returns the string representation for that rank.
+ */
 const char *rank_to_s(Rank r)
 {
     unsigned i = (unsigned)r;
@@ -86,6 +96,11 @@ Suit s_to_suit(const char s[])
     }
 } 
 
+/** print_card takes:
+    @c      Card
+
+    And outputs the rank and suit
+ */
 void print_card(Card c)
 {
     printf("%s%s  ", rank_to_s(c.rank), suit_to_s(c.suit));
@@ -107,6 +122,19 @@ void print_cards(Card *c, int count)
     printf("\n");
 }
 
+int in_hand(Card hand[], int count, Suit s, Rank r)
+{
+    int i = 0;
+
+    // check that (s,r) hasn't already been chosen
+    for(i = 0; i < count; ++i) {
+        if(hand[i].rank == r && hand[i].suit == s) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 /** draw_random_cards takes:
     @c      Card[]
     @count  int
@@ -118,12 +146,21 @@ void draw_random_cards(Card c[], int count)
 {
     srand(time(NULL));
     int i = 0;
+    Suit s;
+    Rank r;
 
     for(i = 0; i < count; ++i) {
-        c[i].suit = (Suit)(rand()%4);
-        c[i].rank = (Rank)(rand()%13);
+        do {
+          s = (Suit)(rand()%4);
+          r = (Rank)(rand()%13);
+
+        } while( in_hand(c, i-1, s, r) );
+
+        c[i].suit = s;
+        c[i].rank = r;
     }
 }
+
 
 /** init_card_from_string takes:
     @c      Card *
@@ -179,6 +216,11 @@ void init_cards_from_strings(Card *c, int count, const char *s[])
     int i = 0;
     for(i = 0; i < count; ++i) {
         init_card_from_string(c + i, s[i]);
+
+        if(in_hand(c, i, c[i].suit, c[i].rank)) {
+            printf("error: duplicates not allowed\n");
+            exit(-1);
+        }
     }
 }
 
