@@ -78,7 +78,13 @@ int is_run(Card c[], int count)
 
 int is_fifteen(Card c[], int count)
 {
-    return 0;
+    int i;
+    int sum = 0;
+
+    for(i = 0; i < count; i++) {
+        sum += (int)c[i].rank;
+    }
+    return (sum == 15);
 }
 
 /** score_and_print takes:
