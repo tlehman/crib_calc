@@ -34,8 +34,8 @@ int is_flush(Card c[], int count)
 {
     if(count < FLUSH_MIN) return 0;
 
-    int i;
     Suit s = c[0].suit;
+    int i;
 
     for(i = 0; i < count; i++) {
         if(c[i].suit != s) return 0;
@@ -43,9 +43,17 @@ int is_flush(Card c[], int count)
     return 1;
 }
 
-int is_of_a_kind(Card c[], int count)
+/** is_pair takes
+    @hand   Card[]
+    @count  int
+
+    and returns 1 if is pair, 0 otherwise.
+ */
+int is_pair(Card c[], int count)
 {
-    return 0;
+    if(count != 2) return 0;
+
+    return (c[0].rank == c[1].rank);
 }
 
 int is_run(Card c[], int count)
@@ -124,20 +132,10 @@ int score_and_print(Card hand[], int count)
             print_cards(subhand, ones);
             score += ones; // TODO: only pick largest flush
         }
-        if( is_of_a_kind(subhand, ones) ) {
-            if(ones == 2) {
-                printf("Pair for 2: ");
-                score += 2;
-            }
-            if(ones == 3) {
-                printf("Three of a kind for 6: ");
-                score += 6;
-            }
-            if(ones == 4) {
-                printf("Four of a kind for 12: ");
-                score += 12;
-            }
+        if( is_pair(subhand, ones) ) {
+            printf("Pair for 2: ");
             print_cards(subhand, ones);
+            score += 2;
         }
         if( is_run(subhand, ones) ) {
             printf("Run of %d for %d: ", ones, ones);

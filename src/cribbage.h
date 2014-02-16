@@ -15,7 +15,7 @@ int compare_cards(const void *a, const void *b);
 
 // score functions
 int is_flush(Card c[], int count);
-int is_of_a_kind(Card c[], int count);
+int is_pair(Card c[], int count);
 int is_run(Card c[], int count);
 int is_fifteen(Card c[], int count);
 
