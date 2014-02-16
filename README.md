@@ -70,5 +70,5 @@ For each subset of cards, the following are checked:
 
 ## Todo
  - Make style consistent
- - Count more than one run (if exists)
+ - Only pick largest flush
 

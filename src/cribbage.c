@@ -22,24 +22,40 @@ int compare_cards(const void *a, const void *b)
     return ((Card *)b)->rank <= ((Card *)a)->rank;
 }
 
+/** is_flush takes
+    @hand   Card[]
+    @count  int
+
+    and returns 1 if is flush, 0 otherwise.
+
+    A flush in cribbage is 5 or more cards of the same suit.
+ */
 int is_flush(Card c[], int count)
 {
+    if(count < FLUSH_MIN) return 0;
+
+    int i;
+    Suit s = c[0].suit;
+
+    for(i = 0; i < count; i++) {
+        if(c[i].suit != s) return 0;
+    }
     return 1;
 }
 
 int is_of_a_kind(Card c[], int count)
 {
-    return 1;
+    return 0;
 }
 
 int is_run(Card c[], int count)
 {
-    return 1;
+    return 0;
 }
 
 int is_fifteen(Card c[], int count)
 {
-    return 1;
+    return 0;
 }
 
 /** score_and_print takes:
@@ -106,6 +122,7 @@ int score_and_print(Card hand[], int count)
         if( is_flush(subhand, ones) ) {
             printf("Flush for %d: ", ones);
             print_cards(subhand, ones);
+            score += ones; // TODO: only pick largest flush
         }
         if( is_of_a_kind(subhand, ones) ) {
             if(ones == 2) {
