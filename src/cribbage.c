@@ -153,15 +153,15 @@ int score_and_print(Card hand[], int count)
             print_cards(subhand, ones);
             score += ones; // TODO: only pick largest flush
         }
-        if( is_pair(subhand, ones) ) {
-            printf("Pair for 2: ");
-            print_cards(subhand, ones);
-            score += 2;
-        }
         if( is_run(subhand, ones) ) {
             printf("Run of %d for %d: ", ones, ones);
             print_cards(subhand, ones);
             score += ones;
+        }
+        if( is_pair(subhand, ones) ) {
+            printf("Pair for 2: ");
+            print_cards(subhand, ones);
+            score += 2;
         }
         if( is_fifteen(subhand, ones) ) {
             printf("Fifteen for 2: ");
