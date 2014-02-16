@@ -152,7 +152,7 @@ void draw_random_cards(Card c[], int count)
     for(i = 0; i < count; ++i) {
         do {
           s = (Suit)(rand()%4);
-          r = (Rank)(rand()%13);
+          r = (Rank)(rand()%12 + 1);
 
         } while( in_hand(c, i-1, s, r) );
 
