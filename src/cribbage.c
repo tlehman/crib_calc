@@ -22,6 +22,25 @@ int compare_cards(const void *a, const void *b)
     return ((Card *)b)->rank <= ((Card *)a)->rank;
 }
 
+int is_flush(Card c[], int count)
+{
+    return 1;
+}
+
+int is_of_a_kind(Card c[], int count)
+{
+    return 1;
+}
+
+int is_run(Card c[], int count)
+{
+    return 1;
+}
+
+int is_fifteen(Card c[], int count)
+{
+    return 1;
+}
 
 /** score_and_print takes:
     @hand   Card *
@@ -33,7 +52,7 @@ int compare_cards(const void *a, const void *b)
       - Runs
       - Fifteens
  */
-int score_and_print(Card *hand, int count)
+int score_and_print(Card hand[], int count)
 {
     int score = 0;
     int suit_map[4]  = {0,0,0,0};
@@ -67,12 +86,14 @@ int score_and_print(Card *hand, int count)
     // 
     int k = 0;
     int sum = 0;
+    int ones = 0;
 
     for(i = 1; i < TWO_TO_THE(count); ++i) {
         k = 0;
+        ones = count_ones(i);
 
         // select subset of hand using bits
-        Card subhand[count_ones(i)];
+        Card subhand[ones];
 
         for(j = 1; j < sizeof(unsigned int)*8; ++j) {
             if(JTH_BIT(i, j)) {
@@ -80,14 +101,37 @@ int score_and_print(Card *hand, int count)
                 k += 1;
             }
         }
-        qsort(subhand, count_ones(i), sizeof(Card), compare_cards);
-        print_cards(subhand, count_ones(i));
+        qsort(subhand, ones, sizeof(Card), compare_cards);
 
-        sum = 0;
-        for(j = 0; j < k; ++j) {
-            sum += rank_val(subhand[j].rank);
+        if( is_flush(subhand, ones) ) {
+            printf("Flush for %d: ", ones);
+            print_cards(subhand, ones);
         }
-
+        if( is_of_a_kind(subhand, ones) ) {
+            if(ones == 2) {
+                printf("Pair for 2: ");
+                score += 2;
+            }
+            if(ones == 3) {
+                printf("Three of a kind for 6: ");
+                score += 6;
+            }
+            if(ones == 4) {
+                printf("Four of a kind for 12: ");
+                score += 12;
+            }
+            print_cards(subhand, ones);
+        }
+        if( is_run(subhand, ones) ) {
+            printf("Run of %d for %d: ", ones, ones);
+            print_cards(subhand, ones);
+            score += ones;
+        }
+        if( is_fifteen(subhand, ones) ) {
+            printf("Fifteen for 2: ");
+            print_cards(subhand, ones);
+            score += 2;
+        }
     }
 
     printf("\nScore: %d\n", score);
