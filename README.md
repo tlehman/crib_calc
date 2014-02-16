@@ -39,24 +39,34 @@ Where `Rank` is an `unsigned int` and `Suit` is an enum type:
 enum suit { club, heart, spade, diamond };
 ```
 
-The algorithm to calculate the score starts by taking an array of Cards, then
-counts flushes by computing a frequency map `{♣ => 2, ♥ => 0, ♠ => 4, ♦ => 0}`.
-
-Given that map, the algorithm then finds all suits whose frequencies are at 
-least 4, then prints then out.
-
-After the flushes are counted, then we move on to pairs, where the unique
-pairs are computed using a 2-d matrix of indices like this:
+To score the hand, we need to look at all combinations of cards.
+For example, for a hand of three cards:  5♣  10♥  5♥  we must 
+consider all 2^3 - 1 = 7 non-empty subsets:
 
 ```
-      12  13  14  15
-          23  24  25
-              34  35
-                  45
+   Hand         | Bits |
+   -------------|------|
+            5♥  | 001  |
+       10♥      | 010  |
+       10♥  5♥  | 011  |
+   5♣           | 100  |
+   5♣       5♥  | 101  |
+   5♣  10♥      | 110  |
+   5♣  10♥  5♥  | 111  |
 ```
 
-The above matrix is implemented as a nested loop where the inner index `j` is 
-always greater than the outer index `i`.
+There is a well known correspondence betweeen subsets and binary 
+representations of integers, illustrated in the 'Bits' column above.
+Using this correspondence, we can enumerate all 2^n subsets by looping
+an integer from 0 to (2^n - 1) and identifying the bits that are one 
+with the subset membership relation.
+
+For each subset of cards, the following are checked:
+ - Pairs
+ - Runs of 3 or higher
+ - Flushes of 4 or more cards
+ - Fifteens
+
 
 ## Todo
  - Make style consistent
