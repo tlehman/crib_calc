@@ -23,7 +23,7 @@ int compare_cards(const void *a, const void *b)
 }
 
 /** is_flush takes
-    @hand   Card[]
+    @c      Card[]
     @count  int
 
     and returns 1 if is flush, 0 otherwise.
@@ -44,7 +44,7 @@ int is_flush(Card c[], int count)
 }
 
 /** is_pair takes
-    @hand   Card[]
+    @c      Card[]
     @count  int
 
     and returns 1 if is pair, 0 otherwise.
@@ -56,9 +56,24 @@ int is_pair(Card c[], int count)
     return (c[0].rank == c[1].rank);
 }
 
+/** is_run takes
+    @c      Card[]
+    @count  int
+
+    and returns 1 if c's ranks are in consecutive order.
+    (assumes c is sorted by rank)
+ */
 int is_run(Card c[], int count)
 {
-    return 0;
+    if(count < 3) return 0;
+    int i;
+    int rdiff;
+
+    for(i = 1; i < count; i++) {
+        rdiff = (int)c[i].rank - (int)c[i-1].rank;
+        if(rdiff != 1) return 0;
+    }
+    return 1;  // TODO: only pick largest run
 }
 
 int is_fifteen(Card c[], int count)
