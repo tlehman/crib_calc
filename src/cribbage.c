@@ -73,7 +73,7 @@ int is_run(Card c[], int count)
         rdiff = (int)c[i].rank - (int)c[i-1].rank;
         if(rdiff != 1) return 0;
     }
-    return 1;  // TODO: only pick largest run
+    return 1;
 }
 
 int is_fifteen(Card c[], int count)
@@ -156,7 +156,7 @@ int score_and_print(Card hand[], int count)
         if( is_run(subhand, ones) ) {
             printf("Run of %d for %d: ", ones, ones);
             print_cards(subhand, ones);
-            score += ones;
+            score += ones; // TODO: only pick largest run
         }
         if( is_pair(subhand, ones) ) {
             printf("Pair for 2: ");
