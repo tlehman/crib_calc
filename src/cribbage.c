@@ -76,13 +76,20 @@ int is_run(Card c[], int count)
     return 1;
 }
 
+/** is_fifteen takes
+    @c      Card[]
+    @count  int
+
+    and returns 1 if c's ranks sum up to 15, otherwise it returns 0
+    (assumes c is sorted by rank)
+ */
 int is_fifteen(Card c[], int count)
 {
     int i;
     int sum = 0;
 
     for(i = 0; i < count; i++) {
-        sum += (int)c[i].rank;
+        sum += rank_val(c[i].rank);
     }
     return (sum == 15);
 }
