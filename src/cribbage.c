@@ -140,6 +140,7 @@ int score_and_print(Card hand[], int count)
     int sum = 0;
     int ones = 0;
 
+    qsort(hand, count, sizeof(Card), compare_cards);
     for(i = 1; i < TWO_TO_THE(count); ++i) {
         k = 0;
         ones = count_ones(i);
@@ -153,7 +154,6 @@ int score_and_print(Card hand[], int count)
                 k += 1;
             }
         }
-        qsort(subhand, ones, sizeof(Card), compare_cards);
 
         if( is_flush(subhand, ones) ) {
             printf("Flush for %d: ", ones);
