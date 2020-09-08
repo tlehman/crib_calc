@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<script src="./hand.js"></script>
+<body>
+    <script>
+        Module.onRuntimeInitialized = async _ => {
+            const hand = {
+                version: Module.cwrap('main', 'number', []),
+            };
+            let argv = "10D 4S 9C AS 6H 4D";
+            console.log(hand.main(argv.length, argv));
+        };
+    </script>
+</body>
+</html>
