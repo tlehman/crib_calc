@@ -7,16 +7,16 @@ prep:
 	if [ -d tmp ]; then echo '' > /dev/null; else mkdir tmp; fi
 
 hand: cribbage.o cards.o hand.o
-	gcc-4.7 -g3 tmp/*.o -o bin/hand
+	emcc -O3 -s WASM=1 tmp/*.o -o bin/hand.js
 
 cribbage.o:
-	gcc-4.7 -g3 -c src/cribbage.c -o tmp/cribbage.o
+	emcc -O3 -s WASM=1 -c src/cribbage.c -o tmp/cribbage.o
 
 cards.o:
-	gcc-4.7 -g3 -c src/cards.c -o tmp/cards.o
+	emcc -O3 -s WASM=1 -c src/cards.c -o tmp/cards.o
 
 hand.o:
-	gcc-4.7 -g3 -c src/hand.c -o tmp/hand.o
+	emcc -O3 -s WASM=1 -c src/hand.c -o tmp/hand.o
 
 clean:
 	rm bin/*
